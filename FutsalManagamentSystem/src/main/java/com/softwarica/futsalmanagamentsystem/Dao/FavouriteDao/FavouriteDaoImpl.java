@@ -1,13 +1,13 @@
 package com.softwarica.futsalmanagamentsystem.Dao.FavouriteDao;
 
+import com.softwarica.futsalmanagamentsystem.Database.DatabaseConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
-import com.softwarica.futsalmanagamentsystem.database.*;
-import com.softwarica.futsalmanagamentsystem.model.CourtType;
-import com.softwarica.futsalmanagamentsystem.model.Favourite;
-import com.softwarica.futsalmanagamentsystem.model.Futsal;
+import com.softwarica.futsalmanagamentsystem.Model.CourtType;
+import com.softwarica.futsalmanagamentsystem.Model.Favourite;
+import com.softwarica.futsalmanagamentsystem.Model.Futsal;
 
 public class FavouriteDaoImpl implements FavouriteDao {
 

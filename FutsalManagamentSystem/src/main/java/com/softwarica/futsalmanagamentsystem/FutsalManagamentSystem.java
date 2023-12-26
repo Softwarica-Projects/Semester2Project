@@ -4,7 +4,7 @@
 
 package com.softwarica.futsalmanagamentsystem;
 
-import com.softwarica.futsalmanagamentsystem.model.RegisterModel;
+import com.softwarica.futsalmanagamentsystem.Model.RegisterModel;
 import com.softwarica.futsalmanagamentsystem.Dao.AuthDao.AuthDaoImpl;
 import com.softwarica.futsalmanagamentsystem.Dao.CourtTypeDao.CourtTypeDaoImpl;
 import com.softwarica.futsalmanagamentsystem.Page.CourtType.NewCourtType.NewCourtType;

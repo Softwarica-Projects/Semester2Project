@@ -2,9 +2,9 @@ package com.softwarica.futsalmanagamentsystem.Dao.FutsalDao;
 
 import java.util.List;
 
-import com.softwarica.futsalmanagamentsystem.model.BookFutsal;
-import com.softwarica.futsalmanagamentsystem.model.Futsal;
-import com.softwarica.futsalmanagamentsystem.model.FutsalBooking;
+import com.softwarica.futsalmanagamentsystem.Model.BookFutsal;
+import com.softwarica.futsalmanagamentsystem.Model.Futsal;
+import com.softwarica.futsalmanagamentsystem.Model.FutsalBooking;
 
 public interface FutsalDao {
 

@@ -1,7 +1,7 @@
 package com.softwarica.futsalmanagamentsystem.Dao.CourtTypeDao;
 
 import java.util.List;
-import com.softwarica.futsalmanagamentsystem.model.CourtType;
+import com.softwarica.futsalmanagamentsystem.Model.CourtType;
 
 public interface CourtTypeDao {
 

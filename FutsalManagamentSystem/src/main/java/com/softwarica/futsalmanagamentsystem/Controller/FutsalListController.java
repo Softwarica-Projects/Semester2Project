@@ -9,7 +9,7 @@ import com.softwarica.futsalmanagamentsystem.Dao.FavouriteDao.FavouriteDaoImpl;
 import com.softwarica.futsalmanagamentsystem.Dao.FutsalDao.FutsalDao;
 import com.softwarica.futsalmanagamentsystem.Dao.FutsalDao.FutsalDaoImpl;
 import com.softwarica.futsalmanagamentsystem.Dao.UserProvider;
-import com.softwarica.futsalmanagamentsystem.model.Futsal;
+import com.softwarica.futsalmanagamentsystem.Model.Futsal;
 import java.util.ArrayList;
 import java.util.List;
 

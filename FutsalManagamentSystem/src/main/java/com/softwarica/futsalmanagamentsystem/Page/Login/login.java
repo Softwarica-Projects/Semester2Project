@@ -9,7 +9,7 @@ import com.softwarica.futsalmanagamentsystem.Controller.LoginController;
 import com.softwarica.futsalmanagamentsystem.Page.Dashboard.UserDashboard.UserDashboard;
 import com.softwarica.futsalmanagamentsystem.Page.Register.Register;
 import com.softwarica.futsalmanagamentsystem.Utility.Utility;
-import com.softwarica.futsalmanagamentsystem.components.ImagePanel;
+import com.softwarica.futsalmanagamentsystem.Components.ImagePanel;
 import java.awt.Dimension;
 import java.net.URL;
 import javax.swing.ImageIcon;

@@ -1,11 +1,11 @@
 package com.softwarica.futsalmanagamentsystem.Dao.CourtTypeDao;
 
+import com.softwarica.futsalmanagamentsystem.Database.DatabaseConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
-import com.softwarica.futsalmanagamentsystem.database.*;
-import com.softwarica.futsalmanagamentsystem.model.CourtType;
+import com.softwarica.futsalmanagamentsystem.Model.CourtType;
 import java.sql.SQLException;
 
 public class CourtTypeDaoImpl implements CourtTypeDao {

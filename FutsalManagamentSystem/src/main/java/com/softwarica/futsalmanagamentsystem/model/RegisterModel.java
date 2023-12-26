@@ -1,4 +1,4 @@
-package com.softwarica.futsalmanagamentsystem.model;
+package com.softwarica.futsalmanagamentsystem.Model;
 
 public class RegisterModel {
     final public String username;

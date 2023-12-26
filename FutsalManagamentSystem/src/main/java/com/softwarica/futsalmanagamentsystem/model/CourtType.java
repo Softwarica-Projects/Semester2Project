@@ -1,4 +1,4 @@
-package com.softwarica.futsalmanagamentsystem.model;
+package com.softwarica.futsalmanagamentsystem.Model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,12 +1,12 @@
 package com.softwarica.futsalmanagamentsystem.Dao.AuthDao;
 
+import com.softwarica.futsalmanagamentsystem.Database.DatabaseConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.softwarica.futsalmanagamentsystem.database.*;
-import com.softwarica.futsalmanagamentsystem.model.RegisterModel;
-import com.softwarica.futsalmanagamentsystem.model.User;
+import com.softwarica.futsalmanagamentsystem.Model.RegisterModel;
+import com.softwarica.futsalmanagamentsystem.Model.User;
 
 public class AuthDaoImpl implements AuthDao {
 

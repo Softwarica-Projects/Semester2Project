@@ -1,7 +1,7 @@
 package com.softwarica.futsalmanagamentsystem.Dao.FavouriteDao;
 
 import java.util.List;
-import com.softwarica.futsalmanagamentsystem.model.Futsal;
+import com.softwarica.futsalmanagamentsystem.Model.Futsal;
 
 public interface FavouriteDao {
 

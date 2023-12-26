@@ -3,7 +3,7 @@ package com.softwarica.futsalmanagamentsystem.Controller;
 import com.softwarica.futsalmanagamentsystem.Dao.AuthDao.AuthDao;
 import com.softwarica.futsalmanagamentsystem.Dao.AuthDao.AuthDaoImpl;
 import com.softwarica.futsalmanagamentsystem.Dao.UserProvider;
-import com.softwarica.futsalmanagamentsystem.model.User;
+import com.softwarica.futsalmanagamentsystem.Model.User;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

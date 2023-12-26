@@ -8,7 +8,7 @@ import com.softwarica.futsalmanagamentsystem.Controller.SignupController;
 import com.softwarica.futsalmanagamentsystem.Page.Login.Login;
 import com.softwarica.futsalmanagamentsystem.Utility.ImageAssets;
 import com.softwarica.futsalmanagamentsystem.Utility.Utility;
-import com.softwarica.futsalmanagamentsystem.model.RegisterModel;
+import com.softwarica.futsalmanagamentsystem.Model.RegisterModel;
 import javax.swing.ImageIcon;
 
 /**

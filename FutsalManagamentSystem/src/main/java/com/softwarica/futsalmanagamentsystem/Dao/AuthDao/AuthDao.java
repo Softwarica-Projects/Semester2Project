@@ -1,7 +1,7 @@
 package com.softwarica.futsalmanagamentsystem.Dao.AuthDao;
 
-import com.softwarica.futsalmanagamentsystem.model.RegisterModel;
-import com.softwarica.futsalmanagamentsystem.model.User;
+import com.softwarica.futsalmanagamentsystem.Model.RegisterModel;
+import com.softwarica.futsalmanagamentsystem.Model.User;
 
 public interface AuthDao {
 
