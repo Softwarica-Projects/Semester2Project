@@ -13,19 +13,20 @@ public class AuthDaoImpl implements AuthDao {
     @Override
     public User loginUser(String username, String password) throws Exception {
         Connection dataConnection = DatabaseConnector.getDatabaseConnection();
+            final PreparedStatement statement = dataConnection
+                    .prepareStatement("SELECT * FROM user where username = ? AND password = ? LIMIT 1");
+            statement.setString(1, username);
+            statement.setString(2, password); 
         try {
             boolean isExists = checkIfUserExists(dataConnection, username);
             if (!isExists)
                 throw new Exception("User with username " + username + " doesnot exists");
 
-            final PreparedStatement statement = dataConnection
-                    .prepareStatement("SELECT * FROM user where username = ? AND password = ? LIMIT 1");
-            statement.setString(1, username);
-            statement.setString(2, password);
+
 
             final var response = statement.executeQuery();
             if (response.next()) {
-                statement.close();
+               
                 return new User(response);
             }
             statement.close();
@@ -33,7 +34,7 @@ public class AuthDaoImpl implements AuthDao {
         } catch (Exception ex) {
             throw ex;
         } finally {
-
+             statement.close();
             dataConnection.close();
         }
     }

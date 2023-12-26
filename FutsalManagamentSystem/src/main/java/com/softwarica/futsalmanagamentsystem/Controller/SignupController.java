@@ -18,8 +18,19 @@ import com.softwarica.futsalmanagamentsystem.model.User;
 public class SignupController {
     final AuthDao authDao = new AuthDaoImpl();
 
-    public void register(String username, String password) throws Exception {
-        var user = new RegisterModel("Rishan", "Rishan@123", "Rishan Shrestha", "Balkot", "9860699727");
-        authDao.registerUser(user);
+    public void register(RegisterModel registerModel) throws Exception {
+        if(registerModel.name.isBlank()){
+            throw new Exception("Full name cannot be empty");
+        }
+        else if(registerModel.username.isBlank()){
+            throw new Exception("Username cannot be empty");
+        }
+        else if(registerModel.password.isBlank()){
+            throw new Exception("Password cannot be empty");
+        }  else if(!registerModel.password.equals(registerModel.confirmPassword)){
+            throw new Exception("Password and confirm password do not match");
+        }
+//        var user = new RegisterModel("Rishan", "Rishan@123", "Rishan Shrestha", "Balkot", "9860699727");
+        authDao.registerUser(registerModel);
     }
 }
