@@ -1,4 +1,4 @@
-package com.softwarica.futsalmanagamentsystem.database;
+package com.softwarica.futsalmanagamentsystem.Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

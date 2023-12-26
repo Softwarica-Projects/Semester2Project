@@ -1,6 +1,6 @@
 package com.softwarica.futsalmanagamentsystem.Dao;
 
-import com.softwarica.futsalmanagamentsystem.model.User;
+import com.softwarica.futsalmanagamentsystem.Model.User;
 
 public class UserProvider {
     private static UserProvider userProvider;

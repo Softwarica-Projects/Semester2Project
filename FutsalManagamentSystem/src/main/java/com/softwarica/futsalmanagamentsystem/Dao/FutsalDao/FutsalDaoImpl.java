@@ -1,15 +1,15 @@
 package com.softwarica.futsalmanagamentsystem.Dao.FutsalDao;
 
+import com.softwarica.futsalmanagamentsystem.Database.DatabaseConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import com.softwarica.futsalmanagamentsystem.database.*;
-import com.softwarica.futsalmanagamentsystem.model.BookFutsal;
-import com.softwarica.futsalmanagamentsystem.model.CourtType;
-import com.softwarica.futsalmanagamentsystem.model.Futsal;
-import com.softwarica.futsalmanagamentsystem.model.FutsalBooking;
+import com.softwarica.futsalmanagamentsystem.Model.BookFutsal;
+import com.softwarica.futsalmanagamentsystem.Model.CourtType;
+import com.softwarica.futsalmanagamentsystem.Model.Futsal;
+import com.softwarica.futsalmanagamentsystem.Model.FutsalBooking;
 
 public class FutsalDaoImpl implements FutsalDao {
 

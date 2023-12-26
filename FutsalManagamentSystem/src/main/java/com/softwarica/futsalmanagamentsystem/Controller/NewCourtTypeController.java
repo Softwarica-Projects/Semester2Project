@@ -2,7 +2,7 @@ package com.softwarica.futsalmanagamentsystem.Controller;
 
 import com.softwarica.futsalmanagamentsystem.Dao.CourtTypeDao.CourtTypeDao;
 import com.softwarica.futsalmanagamentsystem.Dao.CourtTypeDao.CourtTypeDaoImpl;
-import com.softwarica.futsalmanagamentsystem.model.CourtType;
+import com.softwarica.futsalmanagamentsystem.Model.CourtType;
 
 public class NewCourtTypeController {
     final CourtTypeDao courtTypeDao = new CourtTypeDaoImpl();

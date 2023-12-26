@@ -3,8 +3,8 @@ package com.softwarica.futsalmanagamentsystem.Controller;
 import com.softwarica.futsalmanagamentsystem.Dao.AuthDao.AuthDao;
 import com.softwarica.futsalmanagamentsystem.Dao.AuthDao.AuthDaoImpl;
 import com.softwarica.futsalmanagamentsystem.Dao.UserProvider;
-import com.softwarica.futsalmanagamentsystem.model.RegisterModel;
-import com.softwarica.futsalmanagamentsystem.model.User;
+import com.softwarica.futsalmanagamentsystem.Model.RegisterModel;
+import com.softwarica.futsalmanagamentsystem.Model.User;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -23,7 +23,7 @@ public class SignupController {
             throw new Exception("Full name cannot be empty");
         }
         else if(registerModel.username.isBlank()){
-            throw new Exception("Username cannot be empty");
+            throw new Exception("Email Address cannot be empty");
         }
         else if(registerModel.password.isBlank()){
             throw new Exception("Password cannot be empty");
