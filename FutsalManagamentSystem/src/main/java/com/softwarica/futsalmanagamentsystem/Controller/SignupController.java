@@ -23,7 +23,7 @@ public class SignupController {
             throw new Exception("Full name cannot be empty");
         }
         else if(registerModel.username.isBlank()){
-            throw new Exception("Username cannot be empty");
+            throw new Exception("Email Address cannot be empty");
         }
         else if(registerModel.password.isBlank()){
             throw new Exception("Password cannot be empty");
