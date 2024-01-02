@@ -70,8 +70,9 @@ public class CourtTypeDaoImpl implements CourtTypeDao {
         final Connection dataConnection = DatabaseConnector.getDatabaseConnection();
         try {
             final PreparedStatement statement = dataConnection
-                    .prepareStatement("UPDATE court_type set name = ?");
+                    .prepareStatement("UPDATE court_type set name = ? where id = ?");
             statement.setString(1, court.name);
+             statement.setInt(2, id);
             statement.executeUpdate();
             statement.close();
         } catch (SQLException ex) {
@@ -88,7 +89,7 @@ public class CourtTypeDaoImpl implements CourtTypeDao {
             final PreparedStatement statement = dataConnection
                     .prepareStatement("DELETE FROM court_type where id =?");
             statement.setInt(1, id);
-            statement.executeQuery();
+            statement.execute();
 
             statement.close();
             dataConnection.close();

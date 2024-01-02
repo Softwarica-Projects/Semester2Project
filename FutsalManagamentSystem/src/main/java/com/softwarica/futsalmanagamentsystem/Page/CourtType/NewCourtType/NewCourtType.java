@@ -5,6 +5,7 @@
 package com.softwarica.futsalmanagamentsystem.Page.CourtType.NewCourtType;
 
 import com.softwarica.futsalmanagamentsystem.Controller.NewCourtTypeController;
+import com.softwarica.futsalmanagamentsystem.Page.CourtType.CourtTypeList.CourtTypeList;
 import javax.swing.JOptionPane;
 
 /**
@@ -130,7 +131,11 @@ public class NewCourtType extends javax.swing.JFrame {
             pageController.nameField = jTextField1.getText();
             var message = pageController.submit();
             // setVisible(false);
+       
+           
             JOptionPane.showMessageDialog(this, message);
+                 this.dispose();
+             new CourtTypeList().setVisible(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
