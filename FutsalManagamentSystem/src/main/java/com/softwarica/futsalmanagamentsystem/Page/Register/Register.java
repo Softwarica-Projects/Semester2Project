@@ -256,7 +256,7 @@ final SignupController pageController = new SignupController();
         try{       
              pageController.register(new RegisterModel(jTextField2.getText(),new String(jPasswordField2.getPassword()),jTextField1.getText(),jTextField4.getText(),jTextField3.getText(),new String(jPasswordField2.getPassword())));
         Utility.showDialogMessage("Registered Successfully, Please login to continue");
-            setVisible(false) ;
+            this.dispose();
         new Login().setVisible(true);
         }catch(Exception ex){
             Utility.showDialogMessage(ex.getMessage());

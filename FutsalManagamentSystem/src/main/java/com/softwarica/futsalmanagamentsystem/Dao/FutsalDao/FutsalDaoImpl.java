@@ -1,5 +1,6 @@
 package com.softwarica.futsalmanagamentsystem.Dao.FutsalDao;
 
+import com.softwarica.futsalmanagamentsystem.Dao.UserProvider;
 import com.softwarica.futsalmanagamentsystem.Database.DatabaseConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import com.softwarica.futsalmanagamentsystem.Model.BookFutsal;
 import com.softwarica.futsalmanagamentsystem.Model.CourtType;
+import com.softwarica.futsalmanagamentsystem.Model.DashboardInformation;
 import com.softwarica.futsalmanagamentsystem.Model.Futsal;
 import com.softwarica.futsalmanagamentsystem.Model.FutsalBooking;
+import java.sql.Date;
 
 public class FutsalDaoImpl implements FutsalDao {
 
@@ -76,14 +79,58 @@ public class FutsalDaoImpl implements FutsalDao {
 
     @Override
     public void insert(Futsal court) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insert'");
+        Connection dataConnection = DatabaseConnector.getDatabaseConnection();
+        try {
+            dataConnection.setAutoCommit(false);
+            var statement = dataConnection
+                    .prepareStatement(
+                            "INSERT into futsal (name,location,court_type_id,price,opening_hour,closing_hour,created_date,created_by"
+                            + " VALUES (?,?,?,?,?)");
+            statement.setString(1, court.name);
+            statement.setString(2, court.location);
+            statement.setInt(3, court.courtTypeId);
+            statement.setDouble(4, court.price);
+            statement.setDouble(5, court.openingHour);
+            statement.setDouble(6, court.closingHour);
+            statement.setDate(7, new java.sql.Date(System.currentTimeMillis())); 
+            statement.setString(8, UserProvider.getInstance().getName());
+            dataConnection.commit();
+            dataConnection.close();
+        } catch (Exception ex) {
+            dataConnection.rollback();
+            throw ex;
+        } finally {
+            dataConnection.close();
+        }
     }
 
     @Override
     public void update(int id, Futsal court) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+Connection dataConnection = DatabaseConnector.getDatabaseConnection();
+        try {
+            dataConnection.setAutoCommit(false);
+            var statement = dataConnection
+                    .prepareStatement(
+                            "UPDATE futsal Set name =?, location =? ,court_type_id=?,price=?,opening_hour=?"
+                                    + ",closing_hour=?,modified_date=?,modified_by=?"
+                            + " Where id = ?");
+            statement.setString(1, court.name);
+            statement.setString(2, court.location);
+            statement.setInt(3, court.courtTypeId);
+            statement.setDouble(4, court.price);
+            statement.setDouble(5, court.openingHour);
+            statement.setDouble(6, court.closingHour);
+            statement.setDate(7, new java.sql.Date(System.currentTimeMillis())); 
+            statement.setString(8, UserProvider.getInstance().getName());
+            statement.setInt(9, id);
+            dataConnection.commit();
+            dataConnection.close();
+        } catch (Exception ex) {
+            dataConnection.rollback();
+            throw ex;
+        } finally {
+            dataConnection.close();
+        }
     }
 
     @Override
@@ -158,4 +205,34 @@ public class FutsalDaoImpl implements FutsalDao {
         throw new UnsupportedOperationException("Unimplemented method 'deleteFutsalRequest'");
     }
 
+    @Override
+    public DashboardInformation getDashboardInformation() throws Exception {
+        final Connection dataConnection = DatabaseConnector.getDatabaseConnection();
+        var statement = dataConnection.createStatement();
+        try {
+            var isAdmin = UserProvider.getInstance().isAdmin();
+            var userId = UserProvider.getInstance().getUserId();
+
+            var data = statement.executeQuery("select (Select COUNT(*) from court_type) as courtType, \n"
+                    + "(Select COUNT(*) from `user`) as userList, \n"
+                    + "(Select COUNT(*) from futsal) as futsalList, \n"
+                    + "(Select COUNT(*) from favourite f" + (isAdmin ? "" : " WHERE f.user_id = " + userId) + " ) as favourites, \n"
+                    + "(Select COUNT(*) from futsal_booking f " + (isAdmin ? "WHERE 1 " : " WHERE f.user_id = " + userId) + " AND f.modified_date is null) as bookingRequest, \n"
+                    + "(Select COUNT(*) from new_futsal_request f" + (isAdmin ? "" : " WHERE f.user_id = " + userId) + " ) as futsalRequst,\n"
+                    + "(Select COUNT(*) from futsal_booking f" + (isAdmin ? "" : " WHERE f.user_id = " + userId) + ") as totalBooking\n"
+                    + "\n"
+                    + "\n"
+                    + " ");
+            while (!data.next()) {
+                throw new Exception("Error getting data");
+            }
+            return new DashboardInformation(data);
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            statement.close();
+            dataConnection.close();
+        }
+
+    }
 }
