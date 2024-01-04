@@ -22,6 +22,7 @@ public class DashboardInformation {
     public int userList;
 
     public DashboardInformation(ResultSet result) throws SQLException {
+        System.out.println(result.getInt("futsalList"));
         this.futsalList = result.getInt("futsalList");
         this.totalBooking = result.getInt("totalBooking");
         this.favourites = result.getInt("favourites");

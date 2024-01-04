@@ -40,4 +40,8 @@ catch(Exception ex){
    public void addToFavourite(int futsalId) throws Exception{
       favouriteDao.addToFavourite(futsalId, currentUser.getUserId());
    }
+     public void onDelete(int futsalId) throws Exception{
+      futsalDao.deleteById(futsalId);
+   }
+       
 }

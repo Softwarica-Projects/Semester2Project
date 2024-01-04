@@ -11,7 +11,7 @@ public class UserProvider {
     }
 
     public int getUserId() {
-        return 1;
+        return 3;
 //        return user.id;
     }
 
@@ -32,7 +32,7 @@ public class UserProvider {
     }
 
     public boolean isAdmin() {
-        return true;
+        return false;
 //        return user.isAdmin;
         // return user.isAdmin;
     }

@@ -4,17 +4,22 @@
  */
 package com.softwarica.futsalmanagamentsystem.Components;
 
+import com.softwarica.futsalmanagamentsystem.Model.Futsal;
+import com.softwarica.futsalmanagamentsystem.Utility.CallbackFunction;
+
 /**
  *
  * @author Rishan
  */
 public class FavouriteFutsalComponent extends javax.swing.JPanel {
-
+CallbackFunction onRemove, onBook;
     /**
      * Creates new form FavouriteFutsalComponent
      */
-    public FavouriteFutsalComponent() {
+    public FavouriteFutsalComponent(Futsal futal, CallbackFunction onRemove, CallbackFunction onBook ) {
         initComponents();
+        this.onRemove=onRemove;
+        this.onBook=onBook;
     }
 
     /**
@@ -52,10 +57,20 @@ public class FavouriteFutsalComponent extends javax.swing.JPanel {
         jButton17.setBackground(new java.awt.Color(235, 196, 58));
         jButton17.setForeground(new java.awt.Color(255, 255, 255));
         jButton17.setText("Book");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
 
         jButton18.setBackground(new java.awt.Color(209, 106, 31));
         jButton18.setForeground(new java.awt.Color(255, 255, 255));
         jButton18.setText("Remove From Favourite");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
 
         jLabel63.setText("Price");
 
@@ -113,7 +128,7 @@ public class FavouriteFutsalComponent extends javax.swing.JPanel {
                     .addComponent(jLabel62)
                     .addComponent(jButton17)
                     .addComponent(jLabel63))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel64)
                     .addComponent(jLabel65))
@@ -131,6 +146,16 @@ public class FavouriteFutsalComponent extends javax.swing.JPanel {
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        // TODO add your handling code here:
+        onRemove.onTrigger();
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // TODO add your handling code here:
+        onBook.onTrigger();
+    }//GEN-LAST:event_jButton17ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
