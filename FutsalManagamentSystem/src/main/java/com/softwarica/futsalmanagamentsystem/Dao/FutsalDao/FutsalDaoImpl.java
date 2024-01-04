@@ -21,7 +21,8 @@ public class FutsalDaoImpl implements FutsalDao {
         try {
 
             var statement = dataConnection.createStatement();
-            var data = statement.executeQuery("SELECT * from futsal");
+            var data = statement.executeQuery("SELECT f.*, ct.name as court_type_name,(Select COUNT(*) from favourite fav where fav.futsal_id = f.id  and fav.user_id = "+UserProvider.getInstance().getUserId()+ " LIMIT 1) as is_favourite\n" +
+" from futsal f INNER JOIN court_type ct  on ct.id = f.court_type_id");
             List<Futsal> listData = new ArrayList<>();
             while (data.next()) {
                 listData.add(new Futsal(data));
@@ -216,7 +217,7 @@ Connection dataConnection = DatabaseConnector.getDatabaseConnection();
             var data = statement.executeQuery("select (Select COUNT(*) from court_type) as courtType, \n"
                     + "(Select COUNT(*) from `user`) as userList, \n"
                     + "(Select COUNT(*) from futsal) as futsalList, \n"
-                    + "(Select COUNT(*) from favourite f" + (isAdmin ? "" : " WHERE f.user_id = " + userId) + " ) as favourites, \n"
+                    + "(Select COUNT(*) from favourite f WHERE f.user_id = " + userId + " ) as favourites, \n"
                     + "(Select COUNT(*) from futsal_booking f " + (isAdmin ? "WHERE 1 " : " WHERE f.user_id = " + userId) + " AND f.modified_date is null) as bookingRequest, \n"
                     + "(Select COUNT(*) from new_futsal_request f" + (isAdmin ? "" : " WHERE f.user_id = " + userId) + " ) as futsalRequst,\n"
                     + "(Select COUNT(*) from futsal_booking f" + (isAdmin ? "" : " WHERE f.user_id = " + userId) + ") as totalBooking\n"
@@ -226,6 +227,7 @@ Connection dataConnection = DatabaseConnector.getDatabaseConnection();
             while (!data.next()) {
                 throw new Exception("Error getting data");
             }
+           
             return new DashboardInformation(data);
         } catch (Exception ex) {
             throw ex;

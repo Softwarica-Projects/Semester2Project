@@ -164,7 +164,7 @@ public class CourtTypeList extends javax.swing.JFrame {
     private void initializeGrid() {
        
         pageController.courtTypeList.forEach((x) -> addGrid(x));
-        var grid = new GridLayout();
+        var grid = new GridLayout(0,3);
         grid.setHgap(10);
         grid.setVgap(10);
         bodyPanel.setLayout(grid);
@@ -174,12 +174,9 @@ public class CourtTypeList extends javax.swing.JFrame {
     private void addGrid(CourtType data) {
         var temp = new CourtTypeComponent(data.name, () -> {
             try {
-                pageController.onDeleteCourtType(data.id);
-                
-            
+                pageController.onDeleteCourtType(data.id);          
               Utility.showDialogMessage("Deleted");
-              
-//               bodyPanel.removeAll();
+              //               bodyPanel.removeAll();
                initializeGrid();
              } catch (Exception ex) {
               Utility.showDialogMessage(ex.getMessage());
