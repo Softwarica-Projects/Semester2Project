@@ -37,7 +37,7 @@ public interface FutsalDao {
     /// ---New Futsal Request
     public void addFutsalRequest(int userId, Futsal data) throws Exception;
 
-    public List<Futsal> futsalRequestList(int userId) throws Exception;
+    public List<Futsal> futsalRequestList() throws Exception;
 
     public void approveFutsalRequest(int userId, int futsalId) throws Exception;
 

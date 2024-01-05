@@ -11,6 +11,7 @@ import com.softwarica.futsalmanagamentsystem.Dao.UserProvider;
 import com.softwarica.futsalmanagamentsystem.Model.CourtType;
 import com.softwarica.futsalmanagamentsystem.Model.Futsal;
 import com.softwarica.futsalmanagamentsystem.Page.CourtType.NewCourtType.NewCourtType;
+import com.softwarica.futsalmanagamentsystem.Page.Futsal.NewFutsal.NewFutsalPage;
 import com.softwarica.futsalmanagamentsystem.Utility.Utility;
 import java.awt.GridLayout;
 
@@ -33,11 +34,11 @@ public class FutsalList extends javax.swing.JFrame {
     private void initializeGrid() {
 
         pageController.futsalList.forEach((x) -> addGrid(x));
-        var grid = new GridLayout(0,2);
+        var grid = new GridLayout(0, 2);
         grid.setHgap(10);
         grid.setVgap(10);
         jPanel3.setLayout(grid);
-        jButton2.setVisible(UserProvider.getInstance().isAdmin());
+//        jButton2.setVisible(UserProvider.getInstance().isAdmin());
 
     }
 
@@ -58,13 +59,14 @@ public class FutsalList extends javax.swing.JFrame {
         },
                 () -> {
                     this.dispose();
+                    new NewFutsalPage(data.id).setVisible(true);
 //            new NewFutalPage
                 },
                 () -> {
                     try {
                         pageController.onDelete(data.id);
                         Utility.showDialogMessage("Deleted");
-                         
+
 //                        initializeGrid();
                     } catch (Exception ex) {
                         Utility.showDialogMessage(ex.getMessage());
@@ -182,6 +184,8 @@ public class FutsalList extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        new NewFutsalPage(0).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

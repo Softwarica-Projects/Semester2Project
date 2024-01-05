@@ -22,7 +22,7 @@ CallbackFunction onAddToFav,onBook, onEditTap, onDeleteTap;
         jLabel12.setText(futsal.courtTypeName);
         futsalNameLabel.setText(futsal.name);
         addressLabel.setText(futsal.location);
-        priceLabel.setText(futsal.price + "");
+        priceLabel.setText(futsal.price + " /hr");
         openingTimeLabel.setText(futsal.openingHour + ":00-" + futsal.closingHour + ":00 ");
         this.onAddToFav=onAddToFav;
         this.onBook=onBook;

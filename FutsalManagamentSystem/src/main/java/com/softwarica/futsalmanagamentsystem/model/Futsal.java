@@ -1,5 +1,6 @@
 package com.softwarica.futsalmanagamentsystem.Model;
 
+import com.softwarica.futsalmanagamentsystem.Utility.Utility;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -13,6 +14,8 @@ public class Futsal {
     final public double price;
     final public int openingHour;
 
+    final public String status;
+
     final public int closingHour;
     final public int newFutsalRequestId;
     final public String createdDate;
@@ -21,7 +24,7 @@ public class Futsal {
     final public String createdBy;
     final String modifiedDate;
     final String modifiedBy;
-    final  public String courtTypeName;
+    final public String courtTypeName;
 
     public Futsal(int id, String name, String location, int courtTypeId, double price, int openingHour, int closingHour,
             int newFutsalRequestId, String createdDate, String createdBy, String modifiedDate, String modifiedBy) {
@@ -38,7 +41,8 @@ public class Futsal {
         this.modifiedDate = modifiedDate;
         this.modifiedBy = modifiedBy;
         isFavourite = false;
-        this.courtTypeName="";
+        this.courtTypeName = "";
+        this.status = "";
     }
 
     public Futsal(ResultSet result) throws SQLException {
@@ -55,7 +59,7 @@ public class Futsal {
         this.modifiedDate = result.getString("modified_date");
         this.modifiedBy = result.getString("modified_by");
         this.isFavourite = result.getInt("is_favourite") == 1;
-        this.courtTypeName=result.getString("court_type_name");
-
+        this.courtTypeName = Utility.existsColumnInResult("court_type_name", result) ? result.getString("court_type_name") : "" ;
+        this.status = Utility.existsColumnInResult("status", result) ? result.getString("status") : "";
     }
 }

@@ -32,7 +32,7 @@ public class UserProvider {
     }
 
     public boolean isAdmin() {
-        return false;
+        return true;
 //        return user.isAdmin;
         // return user.isAdmin;
     }
