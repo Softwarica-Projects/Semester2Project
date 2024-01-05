@@ -3,9 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.softwarica.futsalmanagamentsystem.Page.Favourite;
-
 import com.softwarica.futsalmanagamentsystem.Components.FavouriteFutsalComponent;
-import com.softwarica.futsalmanagamentsystem.Components.FutsalComponent;
 import com.softwarica.futsalmanagamentsystem.Controller.FavouriteListController;
 import com.softwarica.futsalmanagamentsystem.Model.Futsal;
 import com.softwarica.futsalmanagamentsystem.Utility.Utility;
@@ -28,7 +26,6 @@ public class FavouriteList extends javax.swing.JFrame {
     }
 
     private void initializeGrid() {
-
         pageController.futsalList.forEach((x) -> addGrid(x));
         var grid = new GridLayout(0,2);
         grid.setHgap(10);
@@ -42,14 +39,13 @@ public class FavouriteList extends javax.swing.JFrame {
             try {
                 pageController.onRemove(data.id);
                 Utility.showDialogMessage("Removed from favourite");
-                initializeGrid();
+                this.dispose();
+                new FavouriteList().setVisible(true);
             } catch (Exception ex) {
                 Utility.showDialogMessage(ex.getMessage());
             }
         }, () -> {
             this.dispose();
-
-//            this.dispose();
         }
          );
         bodyPanel.add(temp);

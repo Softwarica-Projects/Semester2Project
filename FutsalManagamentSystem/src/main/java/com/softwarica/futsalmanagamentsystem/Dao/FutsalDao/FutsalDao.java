@@ -1,11 +1,14 @@
 package com.softwarica.futsalmanagamentsystem.Dao.FutsalDao;
 
+import com.softwarica.futsalmanagamentsystem.Dao.AuthDao.AuthDao;
+import com.softwarica.futsalmanagamentsystem.Dao.FavouriteDao.FavouriteDao;
 import java.util.List;
 
 import com.softwarica.futsalmanagamentsystem.Model.BookFutsal;
 import com.softwarica.futsalmanagamentsystem.Model.DashboardInformation;
 import com.softwarica.futsalmanagamentsystem.Model.Futsal;
 import com.softwarica.futsalmanagamentsystem.Model.FutsalBooking;
+
 
 public interface FutsalDao {
 
@@ -44,7 +47,7 @@ public interface FutsalDao {
     public void rejectFutsalRequest(int userId, int futsalId) throws Exception;
 
     public void deleteFutsalRequest(int futsalId) throws Exception;
-    
+
     public DashboardInformation getDashboardInformation() throws Exception;
 
 }

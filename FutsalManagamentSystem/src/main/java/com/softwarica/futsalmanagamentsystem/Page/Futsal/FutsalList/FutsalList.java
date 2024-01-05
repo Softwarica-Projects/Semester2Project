@@ -47,8 +47,9 @@ public class FutsalList extends javax.swing.JFrame {
             try {
                 pageController.addToFavourite(data.id);
                 Utility.showDialogMessage("Added to favourite");
-                jPanel3.removeAll();
-                initializeGrid();
+                this.dispose();
+                new FutsalList().setVisible(true);
+           
             } catch (Exception ex) {
                 Utility.showDialogMessage(ex.getMessage());
             }
@@ -60,14 +61,13 @@ public class FutsalList extends javax.swing.JFrame {
                 () -> {
                     this.dispose();
                     new NewFutsalPage(data.id).setVisible(true);
-//            new NewFutalPage
                 },
                 () -> {
                     try {
                         pageController.onDelete(data.id);
                         Utility.showDialogMessage("Deleted");
-
-//                        initializeGrid();
+                        this.dispose();
+                        new FutsalList().setVisible(true);
                     } catch (Exception ex) {
                         Utility.showDialogMessage(ex.getMessage());
                     }

@@ -62,7 +62,7 @@ public class FavouriteDaoImpl implements FavouriteDao {
         Connection dataConnection = DatabaseConnector.getDatabaseConnection();
         try {
             final PreparedStatement statement = dataConnection
-                    .prepareStatement("DELETE FROM favourtie where user_id = ? & futsal_id = ?");
+                    .prepareStatement("DELETE FROM favourite where user_id = ? and futsal_id = ?");
             statement.setInt(1, userId);
             statement.setInt(2, futsalId);
             statement.execute();

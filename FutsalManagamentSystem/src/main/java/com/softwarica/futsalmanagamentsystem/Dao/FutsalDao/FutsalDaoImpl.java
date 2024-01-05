@@ -219,7 +219,7 @@ public class FutsalDaoImpl implements FutsalDao {
 
             var statement = dataConnection.createStatement();
             var data = statement.executeQuery("SELECT f.*,f.id as new_futsal_request_id, ct.name as court_type_name,0 as is_favourite\n"
-                    + " from new_futsal_request f INNER JOIN court_type ct on ct.id = f.court_type_id");
+                    + " from new_futsal_request f INNER JOIN court_type ct on ct.id = f.court_type_id " + (UserProvider.getInstance().isAdmin() ? "" : ("WHERE f.user_id = " + UserProvider.getInstance().getUserId() )));
             List<Futsal> listData = new ArrayList<>();
             while (data.next()) {
                 listData.add(new Futsal(data));
@@ -238,7 +238,6 @@ public class FutsalDaoImpl implements FutsalDao {
 
     @Override
     public void approveFutsalRequest(int userId, int futsalId) throws Exception {
-        // TODO Auto-generated method stub
         Connection dataConnection = DatabaseConnector.getDatabaseConnection();
         try {
             dataConnection.setAutoCommit(false);
