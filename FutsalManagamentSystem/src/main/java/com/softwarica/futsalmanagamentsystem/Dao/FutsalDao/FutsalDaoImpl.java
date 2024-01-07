@@ -140,44 +140,143 @@ public class FutsalDaoImpl implements FutsalDao {
 
     @Override
     public void bookFutsal(int userId, BookFutsal data) throws Exception {
+        var futsalData = getById(data.futsalId);
+        var totalPrice = futsalData.price * data.bookingHour;        //todo check if can book
+        Connection dataConnection = DatabaseConnector.getDatabaseConnection();
+        try {
+            //checking opening and closing hours
+            var statement = dataConnection.prepareStatement("""
+                            SELECT Exists(
+                            Select f.id from futsal f 
+                            INNER JOIN futsal_booking fb on fb.futsal_id = f.id
+                            where f.id = 4 and f.opening_hour >=? and f.closing_hour>= ?
+                            ) as canbook""");
+            var time = Integer.parseInt(data.bookingDateTime.split(" ")[1].split(":")[0]);
+            statement.setInt(1, time);
+            statement.setInt(2, time + data.bookingHour);
+            var response = statement.executeQuery();
+            response.next();
+            var exists
+                    = response.getBoolean("canbook");
+            if (!exists) {
+                throw new Exception("Futsal cannot be booked on the specified time, futsal is either not opened or already closed");
+            }  
+            //if everything is good the book it
+            statement = dataConnection
+                    .prepareStatement("""
+                                      INSERT INTO futsal_booking (
+                                      `user_id`,
+                                      `futsal_id`,
+                                      `booking_date_time`,
+                                      `booking_hour`,
+                                      `total_price`,
+                                      `created_by`,
+                                      `created_date`)
+                                      VALUES (?,?,?,?,?,?,?)""");
+            statement.setInt(1, userId);
+            statement.setInt(2, futsalData.id);
+            statement.setString(3, data.bookingDateTime);
+            statement.setInt(4, data.bookingHour);
+            statement.setDouble(5, totalPrice);
+            statement.setString(6, UserProvider.getInstance().getName());
+            statement.setDate(7, new java.sql.Date(System.currentTimeMillis()));
+            statement.execute();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            dataConnection.close();
+        }
+    }
+    
+
+    @Override
+    public List<FutsalBooking> bookingList() throws Exception {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'bookFutsal'");
+
+        final Connection dataConnection = DatabaseConnector.getDatabaseConnection();
+        try {
+            var statement = dataConnection.createStatement();
+            var data = statement.executeQuery("SELECT f.*, ff.name as futsal_name,u.name as user_name from futsal_booking f INNER JOIN futsal ff on f.futsal_id = ff.id INNER JOIN user u on u.id = f.user_id"
+                    + "" + (UserProvider.getInstance().isAdmin() ? "" : (" WHERE f.user_id = " + UserProvider.getInstance().getUserId())));
+            List<FutsalBooking> listData = new ArrayList<>();
+            while (data.next()) {
+                listData.add(new FutsalBooking(data));
+            }
+            data.close();
+            statement.close();
+            dataConnection.close();
+            return listData;
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            dataConnection.close();
+        }
     }
 
     @Override
-    public List<FutsalBooking> bookingList(int userId) throws Exception {
+    public void approveFutsalBooking(int id) throws Exception {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'bookingList'");
+        Connection dataConnection = DatabaseConnector.getDatabaseConnection();
+        try {
+            dataConnection.setAutoCommit(false);
+
+            var statement = dataConnection
+                    .prepareStatement("UPDATE futsal_booking set is_approved = 1, modified_date=?, modified_by=? WHERE id = ?");
+
+            statement.setDate(1, new java.sql.Date(System.currentTimeMillis()));
+            statement.setString(2, UserProvider.getInstance().getName());
+            statement.setInt(3, id);
+            statement.execute();
+            dataConnection.commit();
+        } catch (Exception ex) {
+            dataConnection.rollback();
+            throw ex;
+        } finally {
+            dataConnection.close();
+        }
     }
 
     @Override
-    public List<FutsalBooking> approveBookingList(int userId) throws Exception {
+    public void rejectFutsalBooking(int id) throws Exception {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'approveBookingList'");
-    }
+        Connection dataConnection = DatabaseConnector.getDatabaseConnection();
+        try {
+            dataConnection.setAutoCommit(false);
 
-    @Override
-    public List<FutsalBooking> pendingBookingList(int userId) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pendingBookingList'");
-    }
+            var statement = dataConnection
+                    .prepareStatement("UPDATE futsal_booking set is_approved = 0, modified_date=?, modified_by=? WHERE id = ?");
 
-    @Override
-    public void approveFutsalBooking(int userId, int futsalId) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'approveFutsalBooking'");
-    }
-
-    @Override
-    public void rejectFutsalBooking(int userId, int futsalId) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'rejectFutsalBooking'");
+            statement.setDate(1, new java.sql.Date(System.currentTimeMillis()));
+            statement.setString(2, UserProvider.getInstance().getName());
+            statement.setInt(3, id);
+            statement.execute();
+            dataConnection.commit();
+        } catch (Exception ex) {
+            dataConnection.rollback();
+            throw ex;
+        } finally {
+            dataConnection.close();
+        }
     }
 
     @Override
     public void deleteFutsalBooking(int futsalId) throws Exception {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteFutsalBooking'");
+        Connection dataConnection = DatabaseConnector.getDatabaseConnection();
+        try {
+            dataConnection.setAutoCommit(false);
+
+            var statement = dataConnection
+                    .prepareStatement("UPDATE new_futsal_request set status = 'Reject' WHERE id = ?");
+            statement.setInt(1, futsalId);
+            statement.execute();
+            dataConnection.commit();
+        } catch (Exception ex) {
+            dataConnection.rollback();
+            throw ex;
+        } finally {
+            dataConnection.close();
+        }
     }
 
     @Override
@@ -199,7 +298,7 @@ public class FutsalDaoImpl implements FutsalDao {
             statement.setDouble(6, court.closingHour);
             statement.setDate(7, new java.sql.Date(System.currentTimeMillis()));
             statement.setString(8, UserProvider.getInstance().getName());
-            statement.setInt(9, UserProvider.getInstance().getUserId());
+            statement.setInt(9, userId);
             statement.execute();
             dataConnection.commit();
             dataConnection.close();
@@ -219,7 +318,7 @@ public class FutsalDaoImpl implements FutsalDao {
 
             var statement = dataConnection.createStatement();
             var data = statement.executeQuery("SELECT f.*,f.id as new_futsal_request_id, ct.name as court_type_name,0 as is_favourite\n"
-                    + " from new_futsal_request f INNER JOIN court_type ct on ct.id = f.court_type_id " + (UserProvider.getInstance().isAdmin() ? "" : ("WHERE f.user_id = " + UserProvider.getInstance().getUserId() )));
+                    + " from new_futsal_request f INNER JOIN court_type ct on ct.id = f.court_type_id " + (UserProvider.getInstance().isAdmin() ? "" : ("WHERE f.user_id = " + UserProvider.getInstance().getUserId())));
             List<Futsal> listData = new ArrayList<>();
             while (data.next()) {
                 listData.add(new Futsal(data));
@@ -303,35 +402,4 @@ public class FutsalDaoImpl implements FutsalDao {
         }
     }
 
-    @Override
-    public DashboardInformation getDashboardInformation() throws Exception {
-        final Connection dataConnection = DatabaseConnector.getDatabaseConnection();
-        var statement = dataConnection.createStatement();
-        try {
-            var isAdmin = UserProvider.getInstance().isAdmin();
-            var userId = UserProvider.getInstance().getUserId();
-
-            var data = statement.executeQuery("select (Select COUNT(*) from court_type) as courtType, \n"
-                    + "(Select COUNT(*) from `user`) as userList, \n"
-                    + "(Select COUNT(*) from futsal) as futsalList, \n"
-                    + "(Select COUNT(*) from favourite f WHERE f.user_id = " + userId + " ) as favourites, \n"
-                    + "(Select COUNT(*) from futsal_booking f " + (isAdmin ? "WHERE 1 " : " WHERE f.user_id = " + userId) + " AND f.modified_date is null) as bookingRequest, \n"
-                    + "(Select COUNT(*) from new_futsal_request f" + (isAdmin ? "" : " WHERE f.user_id = " + userId) + " ) as futsalRequst,\n"
-                    + "(Select COUNT(*) from futsal_booking f" + (isAdmin ? "" : " WHERE f.user_id = " + userId) + ") as totalBooking\n"
-                    + "\n"
-                    + "\n"
-                    + " ");
-            while (!data.next()) {
-                throw new Exception("Error getting data");
-            }
-
-            return new DashboardInformation(data);
-        } catch (Exception ex) {
-            throw ex;
-        } finally {
-            statement.close();
-            dataConnection.close();
-        }
-
-    }
 }

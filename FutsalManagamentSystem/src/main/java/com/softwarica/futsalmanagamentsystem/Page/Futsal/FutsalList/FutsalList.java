@@ -10,6 +10,7 @@ import com.softwarica.futsalmanagamentsystem.Controller.FutsalListController;
 import com.softwarica.futsalmanagamentsystem.Dao.UserProvider;
 import com.softwarica.futsalmanagamentsystem.Model.CourtType;
 import com.softwarica.futsalmanagamentsystem.Model.Futsal;
+import com.softwarica.futsalmanagamentsystem.Page.Booking.FutsalBook.NewBookFutsal;
 import com.softwarica.futsalmanagamentsystem.Page.CourtType.NewCourtType.NewCourtType;
 import com.softwarica.futsalmanagamentsystem.Page.Futsal.NewFutsal.NewFutsalPage;
 import com.softwarica.futsalmanagamentsystem.Utility.Utility;
@@ -55,7 +56,7 @@ public class FutsalList extends javax.swing.JFrame {
             }
         }, () -> {
             this.dispose();
-
+            new NewBookFutsal(data.id).setVisible(true);
 //            this.dispose();
         },
                 () -> {

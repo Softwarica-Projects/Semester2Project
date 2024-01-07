@@ -49,7 +49,8 @@ public class Utility {
             boolean columnExists = false;
 
             for (int i = 1; i <= columnCount; i++) {
-                if (columnName.equalsIgnoreCase(metaData.getColumnName(i))) {
+                var currentColName =metaData.getColumnName(i);
+                if (columnName.equalsIgnoreCase(currentColName)) {
                     return true;
                 }
             }

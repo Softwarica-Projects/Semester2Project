@@ -2,7 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.softwarica.futsalmanagamentsystem.Page.Futsal.FutsalBook;
+package com.softwarica.futsalmanagamentsystem.Page.Booking.FutsalBook;
+
+import com.softwarica.futsalmanagamentsystem.Controller.FutsalBookController;
+import com.softwarica.futsalmanagamentsystem.Controller.NewFutsalController;
+import com.softwarica.futsalmanagamentsystem.Dao.UserProvider;
+import com.softwarica.futsalmanagamentsystem.Page.Booking.NewBookingRequest.Bookingrequest;
+import com.softwarica.futsalmanagamentsystem.Page.CourtType.CourtTypeList.CourtTypeList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -10,11 +18,27 @@ package com.softwarica.futsalmanagamentsystem.Page.Futsal.FutsalBook;
  */
 public class NewBookFutsal extends javax.swing.JFrame {
 
+    final FutsalBookController pageController;
+
     /**
      * Creates new form NewBookFutsal
      */
-    public NewBookFutsal() {
+    public NewBookFutsal(int id) {
         initComponents();
+        pageController = new FutsalBookController(id);
+        var isAdmin = UserProvider.getInstance().isAdmin();
+        userNameCombobox.setVisible(isAdmin);
+        userNameLabel.setVisible(isAdmin);
+        if (isAdmin) {
+            initUserList();
+        }
+    }
+
+    private void initUserList() {
+        userNameCombobox.removeAllItems();
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        pageController.userList.forEach(x -> model.addElement(x.name));
+        userNameCombobox.setModel(model);
     }
 
     /**
@@ -28,16 +52,16 @@ public class NewBookFutsal extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        bookinTime = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         bookingDate = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         bookingTime = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        userNameLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         bookingHours = new javax.swing.JTextField();
         submitButton = new javax.swing.JButton();
-        userName = new javax.swing.JComboBox<>();
+        userNameCombobox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,27 +70,15 @@ public class NewBookFutsal extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("New Futsal");
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        bookinTime.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel4.setText("Booking Date");
 
         bookingDate.setText("2022-12-13");
-        bookingDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookingDateActionPerformed(evt);
-            }
-        });
 
-        jLabel5.setText("Booking Time");
+        jLabel5.setText("Booking Time (In hr)");
 
-        bookingTime.setText("15:00");
-        bookingTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookingTimeActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setText("User's Name");
+        userNameLabel.setText("User's Name");
 
         jLabel7.setText("Booking Hours");
 
@@ -76,67 +88,71 @@ public class NewBookFutsal extends javax.swing.JFrame {
         submitButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         submitButton.setForeground(new java.awt.Color(255, 255, 255));
         submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitButtonActionPerformed(evt);
+            }
+        });
 
-        userName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Option" }));
+        userNameCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout bookinTimeLayout = new javax.swing.GroupLayout(bookinTime);
+        bookinTime.setLayout(bookinTimeLayout);
+        bookinTimeLayout.setHorizontalGroup(
+            bookinTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bookinTimeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(bookinTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bookinTimeLayout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(212, 212, 212))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                        .addComponent(bookingHours)
-                                        .addGap(125, 125, 125))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(171, 171, 171))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bookinTimeLayout.createSequentialGroup()
+                        .addGroup(bookinTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(bookinTimeLayout.createSequentialGroup()
+                                .addGroup(bookinTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(bookinTimeLayout.createSequentialGroup()
                                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)))
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addGap(70, 70, 70)
-                                        .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addGap(72, 72, 72)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE))
+                                    .addGroup(bookinTimeLayout.createSequentialGroup()
+                                        .addComponent(bookingHours)
+                                        .addGap(73, 73, 73)))
+                                .addGap(72, 72, 72)
+                                .addGroup(bookinTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(bookinTimeLayout.createSequentialGroup()
+                                        .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(162, 162, 162))
+                                    .addComponent(userNameCombobox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(bookinTimeLayout.createSequentialGroup()
                                 .addComponent(bookingDate, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
                                 .addComponent(bookingTime, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(72, 72, 72))))
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            .addGroup(bookinTimeLayout.createSequentialGroup()
                 .addGap(234, 234, 234)
                 .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        bookinTimeLayout.setVerticalGroup(
+            bookinTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bookinTimeLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(bookinTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(bookinTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bookingDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bookingTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(bookinTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel6))
+                    .addComponent(userNameLabel))
                 .addGap(6, 6, 6)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(bookinTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bookingHours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userNameCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(71, 71, 71)
                 .addComponent(submitButton)
                 .addContainerGap(138, Short.MAX_VALUE))
@@ -150,7 +166,7 @@ public class NewBookFutsal extends javax.swing.JFrame {
                 .addGap(277, 277, 277)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(294, Short.MAX_VALUE))
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bookinTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +174,7 @@ public class NewBookFutsal extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bookinTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -178,13 +194,20 @@ public class NewBookFutsal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bookingDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingDateActionPerformed
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bookingDateActionPerformed
-
-    private void bookingTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingTimeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bookingTimeActionPerformed
+        
+        var bookingDateTime = bookingDate.getText() + " " + Integer.valueOf(bookingTime.getText()) + ":00:00";
+        try {
+            pageController.onSubmit(bookingDateTime, Integer.parseInt(bookingHours.getText()),
+                    userNameCombobox.isShowing() ? pageController.userList.get(userNameCombobox.getSelectedIndex()).id : 0 );
+            JOptionPane.showMessageDialog(this, "Booking has been added ");
+            this.dispose();
+            new Bookingrequest().setVisible(true);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_submitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,23 +239,23 @@ public class NewBookFutsal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewBookFutsal().setVisible(true);
+                new NewBookFutsal(0).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel bookinTime;
     private javax.swing.JTextField bookingDate;
     private javax.swing.JTextField bookingHours;
     private javax.swing.JTextField bookingTime;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JButton submitButton;
-    private javax.swing.JComboBox<String> userName;
+    private javax.swing.JComboBox<String> userNameCombobox;
+    private javax.swing.JLabel userNameLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,15 +25,15 @@ public interface FutsalDao {
     /// ----- Futsal Bookings---------
     public void bookFutsal(int userId, BookFutsal data) throws Exception;
 
-    public List<FutsalBooking> bookingList(int userId) throws Exception;
+    public List<FutsalBooking> bookingList() throws Exception;
 
-    public List<FutsalBooking> approveBookingList(int userId) throws Exception;
+//    public List<FutsalBooking> approveBookingList(int userId) throws Exception;
+//
+//    public List<FutsalBooking> pendingBookingList(int userId) throws Exception;
 
-    public List<FutsalBooking> pendingBookingList(int userId) throws Exception;
+    public void approveFutsalBooking(int id) throws Exception;
 
-    public void approveFutsalBooking(int userId, int futsalId) throws Exception;
-
-    public void rejectFutsalBooking(int userId, int futsalId) throws Exception;
+    public void rejectFutsalBooking(int id) throws Exception;
 
     public void deleteFutsalBooking(int futsalId) throws Exception;
 
@@ -48,6 +48,5 @@ public interface FutsalDao {
 
     public void deleteFutsalRequest(int futsalId) throws Exception;
 
-    public DashboardInformation getDashboardInformation() throws Exception;
 
 }

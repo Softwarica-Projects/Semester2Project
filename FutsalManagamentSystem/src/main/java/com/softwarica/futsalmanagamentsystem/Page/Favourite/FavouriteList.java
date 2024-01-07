@@ -3,9 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.softwarica.futsalmanagamentsystem.Page.Favourite;
+
 import com.softwarica.futsalmanagamentsystem.Components.FavouriteFutsalComponent;
 import com.softwarica.futsalmanagamentsystem.Controller.FavouriteListController;
 import com.softwarica.futsalmanagamentsystem.Model.Futsal;
+import com.softwarica.futsalmanagamentsystem.Page.Booking.FutsalBook.NewBookFutsal;
+import com.softwarica.futsalmanagamentsystem.Page.Booking.NewBookingRequest.Bookingrequest;
 import com.softwarica.futsalmanagamentsystem.Utility.Utility;
 import java.awt.GridLayout;
 
@@ -14,7 +17,7 @@ import java.awt.GridLayout;
  * @author Nirajan
  */
 public class FavouriteList extends javax.swing.JFrame {
-
+    
     FavouriteListController pageController = new FavouriteListController();
 
     /**
@@ -24,16 +27,16 @@ public class FavouriteList extends javax.swing.JFrame {
         initComponents();
         initializeGrid();
     }
-
+    
     private void initializeGrid() {
         pageController.futsalList.forEach((x) -> addGrid(x));
-        var grid = new GridLayout(0,2);
+        var grid = new GridLayout(0, 2);
         grid.setHgap(10);
         grid.setVgap(10);
         bodyPanel.setLayout(grid);
-
+        
     }
-
+    
     private void addGrid(Futsal data) {
         var temp = new FavouriteFutsalComponent(data, () -> {
             try {
@@ -46,10 +49,10 @@ public class FavouriteList extends javax.swing.JFrame {
             }
         }, () -> {
             this.dispose();
+            new NewBookFutsal(data.id).setVisible(true);
         }
-         );
-        bodyPanel.add(temp);
-
+        );
+        bodyPanel.add(temp);  
     }
 
     /**

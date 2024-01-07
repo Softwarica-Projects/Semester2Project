@@ -30,7 +30,7 @@ CallbackFunction onAddToFav,onBook, onEditTap, onDeleteTap;
         this.onDeleteTap=onDeleteTap;
         if (UserProvider.getInstance().isAdmin()) {
             addToFavouriteButton.setVisible(!futsal.isFavourite);
-            bookFutsalButton.setVisible(false);
+//            bookFutsalButton.setVisible(false);
         } else {
             addToFavouriteButton.setVisible(!futsal.isFavourite);
             onEditButton.setVisible(false);
