@@ -12,5 +12,6 @@ public interface AuthDao {
     public void registerAdmin(RegisterModel registerModel) throws Exception;
 
     public void deleteUser(int userId) throws Exception;
+    
 
 }

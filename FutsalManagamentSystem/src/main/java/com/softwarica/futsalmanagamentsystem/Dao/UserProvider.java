@@ -11,13 +11,11 @@ public class UserProvider {
     }
 
     public int getUserId() {
-        return 3;
-//        return user.id;
+        return user.id;
     }
 
     public String  getName() {
-        return "system";
-//        return user.name;
+        return user.name;
     }
 
     public static UserProvider getInstance() {
@@ -32,8 +30,6 @@ public class UserProvider {
     }
 
     public boolean isAdmin() {
-        return false;
-//        return user.isAdmin;
-        // return user.isAdmin;
+        return user.isAdmin;
     }
 }
