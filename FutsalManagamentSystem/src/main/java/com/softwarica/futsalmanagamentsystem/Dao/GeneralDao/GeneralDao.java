@@ -16,6 +16,7 @@ import java.util.List;
 public  interface GeneralDao {
 
     List<UserListModel> getUserListForSelection() throws Exception;
+
     List<User> getUserList() throws Exception;
 
     DashboardInformation getDashboardInformation() throws Exception;

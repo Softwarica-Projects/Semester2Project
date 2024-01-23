@@ -15,15 +15,10 @@ public class FavouriteDaoImpl implements FavouriteDao {
     public List<Futsal> getList() throws Exception {
         final Connection dataConnection = DatabaseConnector.getDatabaseConnection();
         try {
-
             var statement = dataConnection.createStatement();
-            
             var data = statement.executeQuery("SELECT f.*, ct.name as court_type_name,(Select 1) as is_favourite\n" +
-" from favourite fav INNER JOIN futsal f on f.id = fav.futsal_id INNER JOIN court_type ct  on ct.id = f.court_type_id "
-                    + "WHERE fav.user_id = "+UserProvider.getInstance().getUserId());
-          
-//            var data = statement
-//                    .executeQuery("SELECT f.* from futsal f INNER JOIN favourite fab on f.id = fab.futsal_id");
+                    " from favourite fav INNER JOIN futsal f on f.id = fav.futsal_id INNER JOIN court_type ct  on ct.id = f.court_type_id "
+                    + "WHERE fav.user_id = " + UserProvider.getInstance().getUserId());
             List<Futsal> listData = new ArrayList<>();
             while (data.next()) {
                 listData.add(new Futsal(data));

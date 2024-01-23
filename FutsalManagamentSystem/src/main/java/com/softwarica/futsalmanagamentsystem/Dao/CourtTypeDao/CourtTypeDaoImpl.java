@@ -49,14 +49,14 @@ public class CourtTypeDaoImpl implements CourtTypeDao {
     public CourtType getById(int id) throws Exception {
         final Connection dataConnection = DatabaseConnector.getDatabaseConnection();
         final PreparedStatement statement = dataConnection
-                    .prepareStatement("SELECT * FROM court_type where id = ? LIMIT 1");
+                .prepareStatement("SELECT * FROM court_type where id = ? LIMIT 1");
         try {
             statement.setInt(1, id);
             var result = statement.executeQuery();
             if (!result.next()) {
                 throw new Exception("No Court Type Found");
             }
-          return new CourtType(result);
+            return new CourtType(result);
         } catch (Exception ex) {
             throw ex;
         } finally {
@@ -72,7 +72,7 @@ public class CourtTypeDaoImpl implements CourtTypeDao {
             final PreparedStatement statement = dataConnection
                     .prepareStatement("UPDATE court_type set name = ? where id = ?");
             statement.setString(1, court.name);
-             statement.setInt(2, id);
+            statement.setInt(2, id);
             statement.executeUpdate();
             statement.close();
         } catch (SQLException ex) {
@@ -90,7 +90,6 @@ public class CourtTypeDaoImpl implements CourtTypeDao {
                     .prepareStatement("DELETE FROM court_type where id =?");
             statement.setInt(1, id);
             statement.execute();
-
             statement.close();
             dataConnection.close();
         } catch (SQLException ex) {

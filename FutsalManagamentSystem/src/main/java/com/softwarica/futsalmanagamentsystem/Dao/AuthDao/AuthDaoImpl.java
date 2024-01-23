@@ -13,20 +13,17 @@ public class AuthDaoImpl implements AuthDao {
     @Override
     public User loginUser(String username, String password) throws Exception {
         Connection dataConnection = DatabaseConnector.getDatabaseConnection();
-            final PreparedStatement statement = dataConnection
-                    .prepareStatement("SELECT * FROM user where username = ? AND password = ? LIMIT 1");
-            statement.setString(1, username);
-            statement.setString(2, password); 
+        final PreparedStatement statement = dataConnection
+                .prepareStatement("SELECT * FROM user where username = ? AND password = ? LIMIT 1");
+        statement.setString(1, username);
+        statement.setString(2, password);
         try {
             boolean isExists = checkIfUserExists(dataConnection, username);
-            if (!isExists)
+            if (!isExists) {
                 throw new Exception("User with username " + username + " doesnot exists");
-
-
-
+            }
             final var response = statement.executeQuery();
             if (response.next()) {
-               
                 return new User(response);
             }
             statement.close();
@@ -34,7 +31,7 @@ public class AuthDaoImpl implements AuthDao {
         } catch (Exception ex) {
             throw ex;
         } finally {
-             statement.close();
+            statement.close();
             dataConnection.close();
         }
     }
@@ -44,8 +41,9 @@ public class AuthDaoImpl implements AuthDao {
         Connection dataConnection = DatabaseConnector.getDatabaseConnection();
         try {
             boolean isExists = checkIfUserExists(dataConnection, registerModel.username);
-            if (isExists)
+            if (isExists) {
                 throw new Exception("User with username " + registerModel.username + " already exists");
+            }
 
             final PreparedStatement statement = dataConnection
                     .prepareStatement(
@@ -69,9 +67,9 @@ public class AuthDaoImpl implements AuthDao {
         Connection dataConnection = DatabaseConnector.getDatabaseConnection();
         try {
             boolean isExists = checkIfUserExists(dataConnection, registerModel.username);
-            if (isExists)
+            if (isExists) {
                 throw new Exception("User with username " + registerModel.username + " already exists");
-
+            }
             final PreparedStatement statement = dataConnection
                     .prepareStatement(
                             "INSERT INTO user (name,username,password,phoneNumber,address,is_admin) VALUES (?,?,?,?,?,1)");
@@ -81,7 +79,6 @@ public class AuthDaoImpl implements AuthDao {
             statement.setString(4, registerModel.phoneNumber);
             statement.setString(5, registerModel.address);
             statement.execute();
-
             statement.close();
         } catch (Exception ex) {
             throw ex;
@@ -120,5 +117,4 @@ public class AuthDaoImpl implements AuthDao {
         statement.close();
         return data;
     }
-
 }

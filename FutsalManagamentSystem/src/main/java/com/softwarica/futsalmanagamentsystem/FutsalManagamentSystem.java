@@ -7,19 +7,20 @@ import com.softwarica.futsalmanagamentsystem.Page.CourtType.CourtTypeList.CourtT
 import com.softwarica.futsalmanagamentsystem.Page.CourtType.NewCourtType.NewCourtType;
 import com.softwarica.futsalmanagamentsystem.Page.Dashboard.AdminDashboard.AdminDashboard;
 import com.softwarica.futsalmanagamentsystem.Page.Login.Login;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
  * @author Rishan
  */
 public class FutsalManagamentSystem {
-
+    
     public static void main(String[] args) throws Exception {
-        try {
-            var frame = new Login();
-            frame.setVisible(true);
-        } catch (Exception ex) {
-
-        }
+        var frame = new Login();
+        frame.setVisible(true );
     }
+    
 }

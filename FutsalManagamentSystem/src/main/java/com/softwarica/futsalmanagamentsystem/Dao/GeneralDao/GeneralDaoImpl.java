@@ -47,22 +47,24 @@ public class GeneralDaoImpl implements GeneralDao {
         try {
             var isAdmin = UserProvider.getInstance().isAdmin();
             var userId = UserProvider.getInstance().getUserId();
-
             var data = statement.executeQuery("""
-                                              select (Select COUNT(*) from court_type) as courtType, 
-                                              (Select COUNT(*) from `user`) as userList, 
-                                              (Select COUNT(*) from futsal) as futsalList, 
-                                              (Select COUNT(*) from favourite f WHERE f.user_id = """ + userId + " ) as favourites, \n"
-                    + "(Select COUNT(*) from futsal_booking f WHERE" + (isAdmin ? "" : " f.user_id = " + userId + " AND") + " f.is_approved is null) as bookingRequest, \n"
-                    + "(Select COUNT(*) from new_futsal_request f" + (isAdmin ? "" : " WHERE f.user_id = " + userId) + " ) as futsalRequst,\n"
-                    + "(Select COUNT(*) from futsal_booking f WHERE" + (isAdmin ? "" : " f.user_id = " + userId + " AND") + " f.is_approved = 1)  as totalBooking \n"
+                    select (Select COUNT(*) from court_type) as courtType,
+                    (Select COUNT(*) from `user`) as userList,
+                    (Select COUNT(*) from futsal) as futsalList,
+                    (Select COUNT(*) from favourite f WHERE f.user_id = """ + userId + " ) as favourites, \n"
+                    + "(Select COUNT(*) from futsal_booking f WHERE"
+                    + (isAdmin ? "" : " f.user_id = " + userId + " AND")
+                    + " f.is_approved is null) as bookingRequest, \n"
+                    + "(Select COUNT(*) from new_futsal_request f" + (isAdmin ? "" : " WHERE f.user_id = " + userId)
+                    + " ) as futsalRequst,\n"
+                    + "(Select COUNT(*) from futsal_booking f WHERE"
+                    + (isAdmin ? "" : " f.user_id = " + userId + " AND") + " f.is_approved = 1)  as totalBooking \n"
                     + "\n"
                     + "\n"
                     + " ");
             while (!data.next()) {
                 throw new Exception("Error getting data");
             }
-
             return new DashboardInformation(data);
         } catch (Exception ex) {
             throw ex;
@@ -91,5 +93,5 @@ public class GeneralDaoImpl implements GeneralDao {
         } finally {
             dataConnection.close();
         }
-     }
+    }
 }
