@@ -68,7 +68,7 @@ public class NewBookFutsal extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(167, 227, 152));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("New Futsal");
+        jLabel3.setText("Book Futsal");
 
         bookinTime.setBackground(new java.awt.Color(255, 255, 255));
 

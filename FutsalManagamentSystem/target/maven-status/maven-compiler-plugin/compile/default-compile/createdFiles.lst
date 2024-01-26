@@ -34,6 +34,7 @@ com\softwarica\futsalmanagamentsystem\Components\NewFutsalRequestComponent.class
 com\softwarica\futsalmanagamentsystem\Page\Dashboard\UserDashboard\UserDashboard$6.class
 com\softwarica\futsalmanagamentsystem\Page\CourtType\CourtTypeList\CourtTypeList$1.class
 com\softwarica\futsalmanagamentsystem\Page\Register\Register$3.class
+com\softwarica\futsalmanagamentsystem\Page\Login\Login$4.class
 com\softwarica\futsalmanagamentsystem\Dao\FutsalDao\FutsalDao.class
 com\softwarica\futsalmanagamentsystem\Page\Register\Register.class
 com\softwarica\futsalmanagamentsystem\Controller\FutsalBookingListController.class
