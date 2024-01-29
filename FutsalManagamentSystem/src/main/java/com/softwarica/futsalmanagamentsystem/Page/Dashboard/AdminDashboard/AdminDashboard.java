@@ -14,6 +14,8 @@ import com.softwarica.futsalmanagamentsystem.Page.CourtType.CourtTypeList.CourtT
 import com.softwarica.futsalmanagamentsystem.Page.Favourite.FavouriteList;
 import com.softwarica.futsalmanagamentsystem.Page.Futsal.FutsalList.FutsalList;
 import com.softwarica.futsalmanagamentsystem.Page.Futsal.NewFutsalRequest.NewFutsalRequest;
+import com.softwarica.futsalmanagamentsystem.Page.Login.Login;
+import java.awt.Window;
 
 /**
  *
@@ -103,6 +105,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(186, 25, 25));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Logout");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Welcome, Rishan");
 
@@ -458,6 +465,16 @@ public class AdminDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
             new FavouriteList().setVisible(true);
     }//GEN-LAST:event_jPanel12userListMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+           Window[] windows = getWindows();
+
+        for (Window window : windows) {
+             window.dispose();
+        }
+        new Login().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel11MouseClicked
         // TODO add your handling code here:

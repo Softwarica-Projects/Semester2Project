@@ -13,6 +13,8 @@ import com.softwarica.futsalmanagamentsystem.Page.Booking.NewBookingRequest.Book
 import com.softwarica.futsalmanagamentsystem.Page.CourtType.CourtTypeList.CourtTypeList;
 import com.softwarica.futsalmanagamentsystem.Page.Favourite.FavouriteList;
 import com.softwarica.futsalmanagamentsystem.Page.Futsal.NewFutsalRequest.NewFutsalRequest;
+import com.softwarica.futsalmanagamentsystem.Page.Login.Login;
+import java.awt.Window;
 
 /**
  *
@@ -29,12 +31,12 @@ public class UserDashboard extends javax.swing.JFrame {
         initComponents();
         try {
             var info = generalDao.getDashboardInformation();
-//            jLabel4.setText("" + info.futsalList);
+            jLabel16.setText("" + info.futsalList);
             jLabel8.setText("" + info.courtType);
             jLabel6.setText("" + info.favourites);
             jLabel10.setText("" + info.totalBooking);
             jLabel12.setText("" + info.futsalRequst);
-//            jLabel14.setText("" + info.bookingRequest);
+            jLabel19.setText("" + info.bookingRequest);
 
         } catch (Exception ex) {
 
@@ -89,6 +91,11 @@ public class UserDashboard extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(186, 25, 25));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Logout");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -417,6 +424,16 @@ public class UserDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel7bookingRequestMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Window[] windows = getWindows();
+
+        for (Window window : windows) {
+             window.dispose();
+        }
+        new Login().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void jPanel3futsalListMouceClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         new FutsalList().setVisible(true);
@@ -424,7 +441,7 @@ public class UserDashboard extends javax.swing.JFrame {
 
     private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        new CourtTypeList() .setVisible(true);
+        new CourtTypeList().setVisible(true);
     }
 
     private void jPanel10bookingRequestMouseClicked(java.awt.event.MouseEvent evt) {

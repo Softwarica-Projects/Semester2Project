@@ -263,7 +263,7 @@ public class FutsalDaoImpl implements FutsalDao {
         try {
             dataConnection.setAutoCommit(false);
             var statement = dataConnection
-                    .prepareStatement("UPDATE new_futsal_request set status = 'Reject' WHERE id = ?");
+                    .prepareStatement("DELETE from futsal_booking WHERE id = ?");
             statement.setInt(1, futsalId);
             statement.execute();
             dataConnection.commit();

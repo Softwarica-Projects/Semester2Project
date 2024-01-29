@@ -28,6 +28,7 @@ com\softwarica\futsalmanagamentsystem\Page\Login\Login.class
 com\softwarica\futsalmanagamentsystem\Page\Dashboard\UserDashboard\UserDashboard.class
 com\softwarica\futsalmanagamentsystem\Dao\FavouriteDao\FavouriteDaoImpl.class
 com\softwarica\futsalmanagamentsystem\Page\Futsal\FutsalList\FutsalList$1.class
+com\softwarica\futsalmanagamentsystem\Page\Futsal\NewFutsal\NewFutsalPage$2.class
 com\softwarica\futsalmanagamentsystem\Page\CourtType\CourtTypeList\CourtTypeList.class
 com\softwarica\futsalmanagamentsystem\Dao\UserProvider.class
 com\softwarica\futsalmanagamentsystem\Components\NewFutsalRequestComponent.class
@@ -44,9 +45,11 @@ com\softwarica\futsalmanagamentsystem\Page\Dashboard\UserDashboard\UserDashboard
 com\softwarica\futsalmanagamentsystem\Components\HeaderBackground.class
 com\softwarica\futsalmanagamentsystem\Controller\UserListController.class
 com\softwarica\futsalmanagamentsystem\Page\Futsal\FutsalList\FutsalList.class
+com\softwarica\futsalmanagamentsystem\Page\Futsal\NewFutsal\NewFutsalPage$3.class
 com\softwarica\futsalmanagamentsystem\Page\Futsal\FutsalDetail\FutsalDetail.class
 com\softwarica\futsalmanagamentsystem\Page\Register\Register$2.class
 com\softwarica\futsalmanagamentsystem\Dao\AuthDao\AuthDaoImpl.class
+com\softwarica\futsalmanagamentsystem\Page\Dashboard\UserDashboard\UserDashboard$8.class
 com\softwarica\futsalmanagamentsystem\Page\Register\Register$4.class
 com\softwarica\futsalmanagamentsystem\Database\DatabaseConnector.class
 com\softwarica\futsalmanagamentsystem\Page\User\UserList\Userlist.class
@@ -55,6 +58,7 @@ com\softwarica\futsalmanagamentsystem\Components\NewBookingRequestComponent$3.cl
 com\softwarica\futsalmanagamentsystem\Page\Dashboard\AdminDashboard\AdminDashboard$2.class
 com\softwarica\futsalmanagamentsystem\Page\Register\Register$1.class
 com\softwarica\futsalmanagamentsystem\Components\FutsalComponent$4.class
+com\softwarica\futsalmanagamentsystem\Page\Futsal\NewFutsal\NewFutsalPage$4.class
 com\softwarica\futsalmanagamentsystem\Components\CourtTypeComponent$1.class
 com\softwarica\futsalmanagamentsystem\Components\NewFutsalRequestComponent$3.class
 com\softwarica\futsalmanagamentsystem\Page\Dashboard\AdminDashboard\AdminDashboard$5.class
@@ -64,6 +68,7 @@ com\softwarica\futsalmanagamentsystem\Components\FutsalComponent$1.class
 com\softwarica\futsalmanagamentsystem\Page\Booking\NewBookingRequest\Bookingrequest$1.class
 com\softwarica\futsalmanagamentsystem\Components\FavouriteFutsalComponent$1.class
 com\softwarica\futsalmanagamentsystem\Utility\Utility.class
+com\softwarica\futsalmanagamentsystem\Page\Futsal\NewFutsal\NewFutsalPage$1.class
 com\softwarica\futsalmanagamentsystem\Page\CourtType\CourtTypeList\CourtTypeList$2.class
 com\softwarica\futsalmanagamentsystem\Page\Dashboard\AdminDashboard\AdminDashboard$7.class
 com\softwarica\futsalmanagamentsystem\Components\FavouriteFutsalComponent.class
@@ -72,6 +77,7 @@ com\softwarica\futsalmanagamentsystem\Page\CourtType\NewCourtType\NewCourtType$3
 com\softwarica\futsalmanagamentsystem\Controller\FutsalRequestListController.class
 com\softwarica\futsalmanagamentsystem\Dao\CourtTypeDao\CourtTypeDao.class
 com\softwarica\futsalmanagamentsystem\Model\RegisterModel.class
+com\softwarica\futsalmanagamentsystem\Controller\NewFutsalController.class
 com\softwarica\futsalmanagamentsystem\Components\FavouriteFutsalComponent$2.class
 com\softwarica\futsalmanagamentsystem\Controller\FutsalListController.class
 com\softwarica\futsalmanagamentsystem\Model\UserListModel.class
@@ -98,6 +104,7 @@ com\softwarica\futsalmanagamentsystem\Dao\CourtTypeDao\CourtTypeDaoImpl.class
 com\softwarica\futsalmanagamentsystem\Page\CourtType\NewCourtType\NewCourtType$1.class
 com\softwarica\futsalmanagamentsystem\Page\Dashboard\AdminDashboard\AdminDashboard$3.class
 com\softwarica\futsalmanagamentsystem\Page\Booking\FutsalBook\NewBookFutsal$1.class
+com\softwarica\futsalmanagamentsystem\Page\Futsal\NewFutsal\NewFutsalPage.class
 com\softwarica\futsalmanagamentsystem\Page\BookFutsal\BookFutsal$2.class
 com\softwarica\futsalmanagamentsystem\Page\BookFutsal\BookFutsal.class
 com\softwarica\futsalmanagamentsystem\Components\UserComponent$1.class
@@ -109,6 +116,7 @@ com\softwarica\futsalmanagamentsystem\Page\CourtType\NewCourtType\NewCourtType.c
 com\softwarica\futsalmanagamentsystem\Model\Favourite.class
 com\softwarica\futsalmanagamentsystem\Page\Booking\FutsalBook\NewBookFutsal.class
 com\softwarica\futsalmanagamentsystem\Components\NewBookingRequestComponent$1.class
+com\softwarica\futsalmanagamentsystem\Page\Dashboard\AdminDashboard\AdminDashboard$9.class
 com\softwarica\futsalmanagamentsystem\Components\NewFutsalRequestComponent$2.class
 com\softwarica\futsalmanagamentsystem\Page\Favourite\FavouriteList$1.class
 com\softwarica\futsalmanagamentsystem\Page\Futsal\FutsalDetail\FutsalDetail$1.class
